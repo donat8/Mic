@@ -6,21 +6,32 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Mic.Models;
+using Mic.Data;
 
 namespace Mic.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+      //  private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MicCategoryContext _micCategoryContext;
+
+        public HomeController(MicCategoryContext micCategoryContext)
         {
-            _logger = logger;
+            _micCategoryContext = micCategoryContext;
         }
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
 
         public IActionResult Index()
         {
-            return View();
+        //    PartialViewResult partialView = new PartialViewResult() {  = _micCategoryContext.Cat };   
+            
+        //    return View(partialView);
+                return View();
         }
 
         public IActionResult Privacy()
@@ -34,4 +45,6 @@ namespace Mic.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
+
+
 }
