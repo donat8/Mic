@@ -78,7 +78,8 @@ namespace Mic.Controllers
 
             return View(cat);
         }
-
+        
+        [Authorize]
         // GET: Cats/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -132,6 +133,7 @@ namespace Mic.Controllers
             return View(cat);
         }
 
+        [Authorize(AuthenticationSchemes ="Admin")]
         // GET: Cats/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

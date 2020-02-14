@@ -1,15 +1,34 @@
 ﻿
-@model HomeViewModel
+@*@model HomeViewModel*@
+@model IEnumerable<Mic.Models.Cat>
+
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Dobro došli! </h1>
 </div>
 
+<div class="container"  >
+    <div class="row"  >
+        @foreach (var item in Model)
+        {<div class="col-3" style="border-spacing:30px 30px">
+                <div class="thumbnail">
+                    <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="230" height="200" />
+                    <div class="carousel-caption">
+                        <h3 class="align-content-center">@Html.DisplayFor(modelItem => item.Price)</h3>
+                        <h3><a> @Html.DisplayFor(modelItem => item.Name)</a></h3>
+                        <p> @Html.DisplayFor(modelItem => item.ShortDescription)</p>
+                    </div>
+                    <div class="addToCart text-right">
 
-    @*<div class="row">
-        @foreach (var cat in Model.Cats)
-        {
-            @Html.PartialAsync("CatSummary", cat)
-        }
-    </div>*@
+                        <a class="btn btn-success" id="cartButton"
+                           asp-controller="ShoppingCart"
+                           asp-action="AddToShoppingCart"
+                           asp-route-catId="@item.CatId">
+                            Dodaj micu u košaricu
+                        </a>
+
+                    </div>
+                </div>
+            </div>}
+    </div>
+</div>

@@ -1,15 +1,15 @@
 ﻿@model Mic.ViewModels.ShoppingCartViewModel
 
-<div class="row checkoutForm">
-    <h2>Your shopping cart</h2>
-    <h4>Here are the drinks in your shopping cart.</h4>
+<div class="row">
+    <h2>Košarica</h2>
+    <h4>Mace koje ste odabrali su:</h4>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Selected amount</th>
-                <th>Drink</th>
-                <th class="text-right">Price</th>
-                <th class="text-right">Subtotal</th>
+                <th>Količina</th>
+                <th>Ime</th>
+                <th class="text-right">Cijena</th>
+                <th class="text-right">Iznos</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,13 +23,13 @@
                     <td class="text-right">
                         @((line.Amount * line.Cat.Price).ToString("c"))
                     </td>
-                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-drinkId="@line.Cat.CatId"></a></td>
+                    <td class="text-center"><a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-drinkId="@line.Cat.CatId">Ukloni</a></td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total:</td>
+                <td colspan="3" class="text-right">Ukupna cijena:</td>
                 <td class="text-right">
                     @Model.ShoppingCartTotal.ToString("c")
                 </td>
@@ -39,17 +39,11 @@
 
     <div class="text-right">
         <div class="btn-group ">
-            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
-            <a class="btn-group">
-                </a>
-                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    Add more drinks<span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a asp-controller="Drink" asp-action="List" asp-route-category="Alcoholic">Alcoholic</a></li>
-                    <li><a asp-controller="Drink" asp-action="List" asp-route-category="Non-alcoholic">Non Alcoholic</a></li>
-                </ul>
-            
+            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Potvrdi</a>
+            <a class="btn btn-danger" asp-controller="Home" asp-action="Index">Usvoji još jednu macu!</a>
+          
+
+
         </div>
     </div>
 </div>

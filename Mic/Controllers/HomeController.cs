@@ -9,33 +9,29 @@ using Mic.Models;
 using Mic.Data;
 using Mic.ViewModels;
 using Mic.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mic.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        // private readonly ILogger<HomeController> _logger;
+        private readonly MicCategoryContext _context;
 
-        //private readonly ICatRepository _catRepository;
-
-        //public HomeController(ICatRepository catRepository)
-        //{
-        //    _catRepository = catRepository;
-        //}
-
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MicCategoryContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        public async Task<IActionResult> Index()
         {
-            //var homeViewModel = new HomeViewModel
-            //{
-            //    Cats = _catRepository.Cats
-            //};
-      
-            return View(/*homeViewModel*/);
+            var micContext = _context.Cat.Include(c => c.Category);
+            return View(await micContext.ToListAsync());
         }
 
         public IActionResult Privacy()

@@ -18,12 +18,9 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@                
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cats" asp-action="Index">Cat</a>
                         </li>
@@ -31,20 +28,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories of Cats</a>
                         </li>
                       
-                            <li class="text-dark">
-                                <text>Korisničko ime:</text>
-                               
-                                <text>Lozinka:</text>
-                            </li>
-                       
-                         <li>
-                                <input id="Text1" type="text" value="Username" />
-                                <input id="Password1" type="password" />
-                         </li>
-                        @await  Component.InvokeAsync("CategoryMenu")
-                            <li>
-                                @await Component.InvokeAsync("ShoppingCartSummary")
-                            </li>
+                            
+                            @*@await  Component.InvokeAsync("CategoryMenu")*@
+                    <li>
+                          @await Component.InvokeAsync("ShoppingCartSummary")
+                    </li>
                         <li>@await Html.PartialAsync("LoginPartial")</li>
                     </ul>
                 </div>

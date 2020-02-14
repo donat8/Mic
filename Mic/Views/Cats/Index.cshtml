@@ -91,32 +91,7 @@
 </table>
 
 
-       
-<div class="container-fluid">
-    @foreach (var item in Model)
-    {
-        <div class="thumbnail">
-            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="200" height="200" />
-            <div class="carousel-caption">
-                <h3 class="align-content-center">@Html.DisplayFor(modelItem => item.Price)</h3>
-                <h3><a> @Html.DisplayFor(modelItem => item.Name)</a></h3>
-                <p> @Html.DisplayFor(modelItem => item.ShortDescription)</p>
-            </div>
-            <div class="addToCart text-right">
-              
-                    <a class="btn btn-success" id="cartButton"
-                       asp-controller="ShoppingCart"
-                       asp-action="AddToShoppingCart"
-                       asp-route-catId="@item.CatId">
-                        Dodaj micu u košaricu
-                    </a>
-               
-            </div>
-        </div>}
-</div>
-
-        
-
+   
 
 
 
