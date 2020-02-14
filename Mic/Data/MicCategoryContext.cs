@@ -4,12 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mic.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Mic.Data
 {
-    public class MicCategoryContext:DbContext
+    public class MicCategoryContext:IdentityDbContext<IdentityUser>
     {
-        public MicCategoryContext(DbContextOptions<MicCategoryContext> options): base(options)
+        public MicCategoryContext(DbContextOptions<MicCategoryContext> options)
+            : base(options)
         {
         }
 
@@ -19,6 +22,8 @@ namespace Mic.Data
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
+   
 
 
     }

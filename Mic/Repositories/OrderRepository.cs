@@ -1,4 +1,5 @@
 ﻿using Mic.Data;
+using Mic.Interfaces;
 using Mic.Models;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Mic.Repositories
 {
-    public class OrderRepository
+    public class OrderRepository:IOrderRepository
     {
         private readonly MicCategoryContext _micCategoryContext;
         private readonly ShoppingCart _shoppingCart;
@@ -22,29 +23,33 @@ namespace Mic.Repositories
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
+          
             _micCategoryContext.Orders.Add(order);
 
-            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+            _micCategoryContext.SaveChanges();
 
-            foreach(var item in shoppingCartItems) {
+            var shoppingCartItems = _shoppingCart.ShoppingCartItems;
+        
+            foreach (var item in shoppingCartItems)
+            {
                 var orderDetail = new OrderDetail()
                 {
                     Amount = item.Amount,
                     CatId = item.Cat.CatId,
-                    OrderId = order.OrderId,
+                     OrderId = order.OrderId,
                     Price = item.Cat.Price
+
+
                 };
+
+
                 _micCategoryContext.OrderDetails.Add(orderDetail);
             }
-             _micCategoryContext.SaveChanges();       
+
+            _micCategoryContext.SaveChanges();
+
+
         }
-
-
-
-
-
-
-
 
 
 

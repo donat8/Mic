@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Mic.Data;
 using Microsoft.AspNetCore.Http;
 using Mic.Models;
+using Mic.Interfaces;
+using Mic.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace Mic
 {
@@ -32,12 +35,28 @@ namespace Mic
       
             services.AddDbContext<MicCategoryContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MicCategoryContext")));
+            //////////////////////////////////
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<MicCategoryContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+               
+
+            });
+            services.AddTransient<ICatRepository, CatRepository>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped(sp => ShoppingCart.GetCart(sp));  //kreira objekt koji je asociran s konekcijom
 
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMvc();
+            
             services.AddMemoryCache();
             services.AddSession();
         }
@@ -48,6 +67,7 @@ namespace Mic
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
@@ -59,9 +79,10 @@ namespace Mic
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
+          
 
             app.UseEndpoints(endpoints =>
             {
@@ -69,6 +90,7 @@ namespace Mic
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

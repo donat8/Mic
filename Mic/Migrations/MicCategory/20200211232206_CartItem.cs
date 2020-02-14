@@ -44,7 +44,7 @@ namespace Mic.Migrations.MicCategory
                         column: x => x.CatId,
                         principalTable: "Cat",
                         principalColumn: "CatId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);   //restrict
                 });
 
             migrationBuilder.CreateIndex(

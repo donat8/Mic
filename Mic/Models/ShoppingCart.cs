@@ -93,11 +93,13 @@ namespace Mic.Models
 
         public void ClearCart()
         {
+            
             var cartItems = _micCategoryContext
                 .ShoppingCartItems
                 .Where(cart => cart.ShoppingCartId == ShoppingCartId);
 
             _micCategoryContext.ShoppingCartItems.RemoveRange(cartItems);
+           
 
             _micCategoryContext.SaveChanges();
         }

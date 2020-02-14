@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Mic.Data;
 using Mic.Models;
+using Mic.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Mic.Controllers
 {
     public class CatsController : Controller
     {
         private readonly MicCategoryContext _context;
+        //private readonly ICatRepository _catRepository;
 
-        public CatsController(MicCategoryContext context)
+        public CatsController(MicCategoryContext context/*,ICatRepository catRepository */)
         {
             _context = context;
+            //_catRepository = catRepository;
         }
 
         // GET: Cats
@@ -45,11 +49,11 @@ namespace Mic.Controllers
             return View(cat);
         }
 
+        [Authorize]
+        
         // GET: Cats/Create
         public IActionResult Create()
         {
-            // ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "CategoryId", "CategoryId");
-            // ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
         
             ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName");
     
@@ -70,10 +74,8 @@ namespace Mic.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-        //   ViewData["CategoryId"] = new SelectList(_context.Cat, "Id", "Name", cat.Category.CategoryName);
             ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName",cat.CategoryId);
 
-            // ViewData["CategoryId"] = new SelectList(cat.Category);
             return View(cat);
         }
 
@@ -140,7 +142,8 @@ namespace Mic.Controllers
 
             var cat = await _context.Cat
                 .Include(c => c.Category)
-                .FirstOrDefaultAsync(m => m.CatId == id);
+                .FirstOrDefaultAsync(m => m.CatId == id)
+                ;
             if (cat == null)
             {
                 return NotFound();
@@ -163,6 +166,16 @@ namespace Mic.Controllers
         private bool CatExists(int id)
         {
             return _context.Cat.Any(e => e.CatId == id);
+        }
+
+        public ViewResult Details(int catId)
+        {
+            var cat = _context.Cat.FirstOrDefault(d => d.CatId == catId);
+            if (cat == null)
+            {
+                return View("~/Views/Error/Error.cshtml");
+            }
+            return View(cat);
         }
     }
 }

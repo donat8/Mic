@@ -1,5 +1,5 @@
 ﻿
-@model Mic.Data.MicCategoryContext
+@model HomeViewModel
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -7,9 +7,9 @@
 </div>
 
 
-    <div class="row">
-        @foreach (var cat in Model.Cat)
+    @*<div class="row">
+        @foreach (var cat in Model.Cats)
         {
             @Html.PartialAsync("CatSummary", cat)
         }
-    </div>
+    </div>*@

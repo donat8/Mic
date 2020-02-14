@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Mačke u ponudi!</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" value="Kreiraj novu micu" class="btn btn-primary">Kreiraj novu micu!</a>
 </p>
 <table class="table">
     <thead>
@@ -80,9 +80,9 @@
                     @Html.DisplayFor(modelItem => item.Category.CategoryName)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CatId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CatId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CatId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.CatId">Uredi</a> |
+                    <a asp-action="Details" asp-route-id="@item.CatId">Detalji</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CatId">Izbriši</a>
                 </td>
             </tr>
         }
@@ -91,19 +91,31 @@
 </table>
 
 
-        @foreach (var item in Model)
-        {
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                   <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="200" height="200"  />
-                    <div class="carousel-caption">
-                        <h3 class="align-content-center">@Html.DisplayFor(modelItem => item.Price)</h3>
-                        <h3><a> @Html.DisplayFor(modelItem => item.Name)</a></h3>
-                        <p> @Html.DisplayFor(modelItem => item.ShortDescription)</p>
-                    </div>
-                </div>
+       
+<div class="container-fluid">
+    @foreach (var item in Model)
+    {
+        <div class="thumbnail">
+            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="200" height="200" />
+            <div class="carousel-caption">
+                <h3 class="align-content-center">@Html.DisplayFor(modelItem => item.Price)</h3>
+                <h3><a> @Html.DisplayFor(modelItem => item.Name)</a></h3>
+                <p> @Html.DisplayFor(modelItem => item.ShortDescription)</p>
             </div>
-        }
+            <div class="addToCart text-right">
+              
+                    <a class="btn btn-success" id="cartButton"
+                       asp-controller="ShoppingCart"
+                       asp-action="AddToShoppingCart"
+                       asp-route-catId="@item.CatId">
+                        Dodaj micu u košaricu
+                    </a>
+               
+            </div>
+        </div>}
+</div>
+
+        
 
 
 

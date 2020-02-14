@@ -7,31 +7,35 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Mic.Models;
 using Mic.Data;
+using Mic.ViewModels;
+using Mic.Repositories;
 
 namespace Mic.Controllers
 {
     public class HomeController : Controller
     {
-      //  private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        private readonly MicCategoryContext _micCategoryContext;
+        //private readonly ICatRepository _catRepository;
 
-        public HomeController(MicCategoryContext micCategoryContext)
-        {
-            _micCategoryContext = micCategoryContext;
-        }
-
-        //public HomeController(ILogger<HomeController> logger)
+        //public HomeController(ICatRepository catRepository)
         //{
-        //    _logger = logger;
+        //    _catRepository = catRepository;
         //}
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
 
         public IActionResult Index()
         {
-        //    PartialViewResult partialView = new PartialViewResult() {  = _micCategoryContext.Cat };   
-            
-        //    return View(partialView);
-                return View();
+            //var homeViewModel = new HomeViewModel
+            //{
+            //    Cats = _catRepository.Cats
+            //};
+      
+            return View(/*homeViewModel*/);
         }
 
         public IActionResult Privacy()
