@@ -22,14 +22,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>*@                
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cats" asp-action="Index">Cat</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Categories of Cats</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
                         </li>
                       
-                            
-                            @*@await  Component.InvokeAsync("CategoryMenu")*@
+                            <li>                                             </li>
                     <li>
                           @await Component.InvokeAsync("ShoppingCartSummary")
                     </li>

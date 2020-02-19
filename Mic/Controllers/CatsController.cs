@@ -52,6 +52,7 @@ namespace Mic.Controllers
         [Authorize]
         
         // GET: Cats/Create
+        [Authorize]
         public IActionResult Create()
         {
         
@@ -133,7 +134,7 @@ namespace Mic.Controllers
             return View(cat);
         }
 
-        [Authorize(AuthenticationSchemes ="Admin")]
+        [Authorize]
         // GET: Cats/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

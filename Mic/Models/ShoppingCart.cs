@@ -46,12 +46,14 @@ namespace Mic.Models
                     Cat = cat,
                     Amount = 1
                 };
+                cat.InStock -= 1;
 
                 _micCategoryContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
                 shoppingCartItem.Amount++;
+                cat.InStock -= 1;
             }
             _micCategoryContext.SaveChanges();
             
@@ -94,12 +96,23 @@ namespace Mic.Models
         public void ClearCart()
         {
             
-            var cartItems = _micCategoryContext
+            var cartItems = 
+                _micCategoryContext
                 .ShoppingCartItems
                 .Where(cart => cart.ShoppingCartId == ShoppingCartId);
 
+            
+
             _micCategoryContext.ShoppingCartItems.RemoveRange(cartItems);
-           
+
+
+
+            _micCategoryContext.ShoppingCartItems.RemoveRange(_micCategoryContext
+                .ShoppingCartItems
+                .Where(cart => cart.Amount == 1));
+
+            _micCategoryContext.Cat.RemoveRange(_micCategoryContext.Cat.Where(c=>c.InStock<1));
+
 
             _micCategoryContext.SaveChanges();
         }

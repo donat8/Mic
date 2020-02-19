@@ -8,8 +8,6 @@ namespace Mic.ViewModels
 {
     public class HomeViewModel
     {
-
         public IEnumerable<Cat> Cats { get; set; }
-
     }
 }

@@ -28,17 +28,18 @@ namespace Mic.Controllers
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
-
             };
             return View(sCVM);
 
         }
+        
         public RedirectToActionResult AddToShoppingCart(int catId)
         {
             var selectedCat = _micCategoryContext.Cat.FirstOrDefault(p => p.CatId == catId);
             if (selectedCat != null)
             {
                 _shoppingCart.AddToCart(selectedCat, 1);
+               
             }
             return RedirectToAction("Index");
         }
@@ -46,10 +47,13 @@ namespace Mic.Controllers
         public RedirectToActionResult RemoveFromShoppingCart(int catId)
         {
             var selectedCat = _micCategoryContext.Cat.FirstOrDefault(p => p.CatId == catId);
+          
+            
             if (selectedCat != null)
             {
                 _shoppingCart.RemoveFromCart(selectedCat);
             }
+      
             return RedirectToAction("Index");
         }
     }

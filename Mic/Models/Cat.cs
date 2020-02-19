@@ -43,7 +43,7 @@ namespace Mic.Models
         public bool IsPreferredCat { get; set; }
 
         [Display(Name = "Količina")]
-        [Range(0,8)]
+        [Range(0,7)]
         public int InStock { get; set; }
 
 

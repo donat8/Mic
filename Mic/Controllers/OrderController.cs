@@ -14,12 +14,14 @@ namespace Mic.Controllers
     {
         private readonly IOrderRepository _orderRepository;
         private readonly ShoppingCart _shoppingCart;
+        //private readonly MicCategoryContext _micCategoryContext;
 
 
-        public OrderController(IOrderRepository orderRepository, ShoppingCart shoppingCart)
+        public OrderController(IOrderRepository orderRepository, ShoppingCart shoppingCart,MicCategoryContext micCategoryContext)
         {
             _orderRepository = orderRepository;
             _shoppingCart = shoppingCart;
+            //_micCategoryContext = micCategoryContext;
         }
 
         [Authorize]
@@ -43,6 +45,8 @@ namespace Mic.Controllers
             {
                 _orderRepository.CreateOrder(order);
                 _shoppingCart.ClearCart();
+                
+
                 return RedirectToAction("CheckoutComplete");
             }
             return View(order);

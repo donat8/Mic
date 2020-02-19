@@ -30,12 +30,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ImageThumbnailUrl)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.IsPreferredCat)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.InStock)
             </th>
@@ -67,12 +67,12 @@
                 <td>
                     <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" height="42" width="42" />
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.ImageThumbnailUrl)
-                </td>
-                <td>
+                </td>*@
+                @*<td>
                     @Html.DisplayFor(modelItem => item.IsPreferredCat)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.InStock)
                 </td>
@@ -81,7 +81,6 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CatId">Uredi</a> |
-                    <a asp-action="Details" asp-route-id="@item.CatId">Detalji</a> |
                     <a asp-action="Delete" asp-route-id="@item.CatId">Izbriši</a>
                 </td>
             </tr>

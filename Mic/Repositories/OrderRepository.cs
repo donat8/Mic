@@ -22,10 +22,9 @@ namespace Mic.Repositories
 
         public void CreateOrder(Order order)
         {
-            order.OrderPlaced = DateTime.Now;
-          
+            order.OrderPlaced = DateTime.Now;         
             _micCategoryContext.Orders.Add(order);
-
+           
             _micCategoryContext.SaveChanges();
 
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
@@ -36,22 +35,12 @@ namespace Mic.Repositories
                 {
                     Amount = item.Amount,
                     CatId = item.Cat.CatId,
-                     OrderId = order.OrderId,
+                    OrderId = order.OrderId,
                     Price = item.Cat.Price
-
-
                 };
-
-
                 _micCategoryContext.OrderDetails.Add(orderDetail);
             }
-
             _micCategoryContext.SaveChanges();
-
-
         }
-
-
-
     }
 }
