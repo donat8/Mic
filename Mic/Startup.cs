@@ -44,9 +44,7 @@ namespace Mic
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredUniqueChars = 0;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-               
-
+                options.Password.RequireUppercase = false;              
             });
             services.AddTransient<ICatRepository, CatRepository>();
 
