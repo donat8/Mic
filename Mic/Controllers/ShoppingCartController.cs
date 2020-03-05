@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Mic.Data;
 using Mic.Models;
 using Mic.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mic.Controllers
@@ -32,7 +33,8 @@ namespace Mic.Controllers
             return View(sCVM);
 
         }
-        
+
+        [Authorize]
         public RedirectToActionResult AddToShoppingCart(int catId)
         {
             var selectedCat = _micCategoryContext.Cat.FirstOrDefault(p => p.CatId == catId);

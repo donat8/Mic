@@ -1,4 +1,5 @@
 ﻿using Mic.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +33,7 @@ namespace Mic.Models
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
-
+       
         public void AddToCart(Cat cat, int amount)
         {
             var shoppingCartItem = _micCategoryContext.ShoppingCartItems.SingleOrDefault(
