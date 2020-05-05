@@ -1,34 +1,89 @@
-﻿
-@*@model HomeViewModel*@
+﻿@*@model HomeViewModel*@
 @model IEnumerable<Mic.Models.Cat>
+<head>
+    <style>
+        .container-pic {
+            position: relative;   
+            margin:0px;
+            padding:0px;
+        }
 
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            background-color: #008CBA;
+        }
+
+        .container-pic:hover .overlay {
+            opacity: 0.8;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+    </style>
+</head>
 
 <div class="text-center">
-    <h1 class="display-4">Dobro došli! </h1>
+    <h1 class="display-4">Dobrodošli! </h1>
 </div>
 
-<div class="container"  >
-    <div class="row"  >
-        @foreach (var item in Model)
-        {<div class="col-3">
-                <div class="thumbnail">
-                    <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" width="230" height="200" />
-                    <div class="carousel-caption">
-                        <h3 class="align-content-center">@Html.DisplayFor(modelItem => item.Price)</h3>
-                        <h3><a> @Html.DisplayFor(modelItem => item.Name)</a></h3>
-                        <p> @Html.DisplayFor(modelItem => item.ShortDescription)</p>
-                    </div>
-                    <div class="addToCart text-right">
+<div class="card-deck">
+    @foreach (var cat in Model)
+    {
+    <div class="col-sm-4">
+        <div class="card border-warning" style="width: 18rem; margin-bottom:25px">
+            <div class="card-header"><h3><b>@Html.DisplayFor(modelItem => cat.Name)</b></h3></div>
+            <div class="container-pic">
+                <img class="card-img-bottom" width="250" height="200" style="margin:0px;" src="@Html.DisplayFor(modelItem => cat.ImageUrl)"  />
+                <div class="overlay">
+                    <div class="text">@Html.DisplayFor(modelItem => cat.ShortDescription)</div>
+                </div>
+            </div>
+                <div class="card-footer">
 
-                        <a class="btn btn-success" id="cartButton"
-                           asp-controller="ShoppingCart"
-                           asp-action="AddToShoppingCart"
-                           asp-route-catId="@item.CatId">
-                            Dodaj micu u košaricu
-                        </a>
-
+                    <div class="row">
+                        @* like *@
+                        <div class="col-sm">
+                            <a class="btn btn-outline-danger btn-lg">
+                                <i class="far fa-heart fa-lg"></i>
+                            </a>
+                        </div>
+                        @*comment*@
+                        <div class="col-sm">
+                            <a class="btn btn-outline-info btn-lg">
+                                <i class="far fa-comment-dots fa-lg"></i>
+                            </a>
+                        </div>
+                        @*shoppingcart*@
+                        <div class="col-sm-auto">
+                            <a class="btn btn-success btn-sm" style="width:62px;height:45px;padding:0" id="cartButton"
+                               asp-controller="ShoppingCart"
+                               asp-action="AddToShoppingCart"
+                               asp-route-catId="@cat.CatId">
+                                <b> @Html.DisplayFor(modelItem => cat.Price)</b>
+                                <br />
+                                <i class="fas fa-cart-plus"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>}
-    </div>
+            </div>
+        </div>
+    }
 </div>

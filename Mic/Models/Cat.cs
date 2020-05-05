@@ -31,6 +31,10 @@ namespace Mic.Models
         [StringLength(501)]
         public string LongDescription { get; set; }
 
+        [Display(Name="Kastrirana", Description ="Je li maca kastrirana")]
+       
+         public bool Castrated { get; set; }
+
         [Display(Name = "Cijena")]
         [Range(0,100)]
         [DataType(DataType.Currency)]
