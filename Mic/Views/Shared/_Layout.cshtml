@@ -13,23 +13,31 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Mic</a>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #A199D4";>
+            @*<div class="container">*@
+                
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation">  
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        @*<li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>*@
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-around">
+                    <ul class="navbar-nav justify-content-around flex-grow-1">  
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
+                            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Mic</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
+                            <a class="nav-link text-dark" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
+                        </li>
+                        <li>
+                            <form class="form-inline">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Trazi</button>
+                            </form>
                         </li>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
@@ -42,7 +50,7 @@
                         <li>@await Html.PartialAsync("LoginPartial")</li>
                     </ul>
                 </div>
-            </div>
+            @*</div>*@
         </nav>
     </header>
     <div class="container">

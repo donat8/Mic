@@ -3,19 +3,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1><u>Role:</u></h1>
 
-<h2>Roles Listing </h2>
+<br />
+<h2>Lista svih rola:</h2>
 
 
 @if (Model.Any())
 {
     <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
-       asp-controller="Roles">Add new role</a>
+       asp-controller="Roles">Dodaj novu rolu!</a>
 
     foreach (var role in Model)
     {
-        <div class="card mb-3">
+        <div class="card mb-3 border-danger">
             <div class="card-header">
                 Role Id : @role.Id
             </div>

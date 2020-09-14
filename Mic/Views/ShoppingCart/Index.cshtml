@@ -1,49 +1,48 @@
 ﻿@model Mic.ViewModels.ShoppingCartViewModel
 
-<div class="row">
-    <h2>Košarica</h2>
+    <h2><u>Košarica!</u></h2><br />
     <h4>Mace koje ste odabrali su:</h4>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Količina</th>
-                <th>Ime</th>
-                <th class="text-right">Cijena</th>
-                <th class="text-right">Iznos</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
-            {
+
+    <div class="row">
+
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td class="text-center">@line.Amount</td>
-                    <td class="text-left">@line.Cat.Name</td>
-                    <td class="text-right">@line.Cat.Price.ToString("c")</td>
-                    <td class="text-right">
-                        @((line.Amount * line.Cat.Price).ToString("c"))
-                    </td>
-                    <td class="text-center"><a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-catId="@line.Cat.CatId">Ukloni</a></td>
+                    <th>Količina</th>
+                    <th>Ime</th>
+                    <th class="text-right">Cijena</th>
+                    <th class="text-right">Iznos</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="3" class="text-right">Ukupna cijena:</td>
-                <td class="text-right">
-                    @Model.ShoppingCartTotal.ToString("c")
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="text-center">@line.Amount</td>
+                        <td class="text-left">@line.Cat.Name</td>
+                        <td class="text-right">@line.Cat.Price.ToString("c")</td>
+                        <td class="text-right">
+                            @((line.Amount * line.Cat.Price).ToString("c"))
+                        </td>
+                        <td class="text-center"><a class="btn btn-danger" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-catId="@line.Cat.CatId">Ukloni</a></td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Ukupna cijena:</td>
+                    <td class="text-right">
+                        @Model.ShoppingCartTotal.ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
 
-    <div class="text-right">
-        <div class="btn-group ">
-            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Potvrdi</a>
-            <a class="btn btn-danger" asp-controller="Home" asp-action="Index">Usvoji još jednu macu!</a>
-          
-
-
+        <div class="text-right float-right" >
+            <div class="btn-group">
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Potvrdi</a>
+                <a class="btn btn-danger" asp-controller="Home" asp-action="Index">Usvoji još jednu macu!</a>
+            </div>
         </div>
     </div>
-</div>
