@@ -1,78 +1,80 @@
-﻿@*@model HomeViewModel*@
+﻿
 @model IEnumerable<Mic.Models.Cat>
-<head>
-    <style>
-        .container-pic {
-            position: relative;   
-            margin:0px;
-            padding:0px;
-        }
+<style>
+    .container-pic {
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+    }
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            width: 100%;
-            opacity: 0;
-            transition: .5s ease;
-            background-color: #008CBA;
-        }
+    .overlay-pic {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #008CBA;
+    }
 
-        .container-pic:hover .overlay {
-            opacity: 0.8;
-        }
+    .container-pic:hover .overlay-pic {
+        opacity: 0.8;
+    }
 
-        .text {
-            color: white;
-            font-size: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-    </style>
-</head>
+    .text-fade-away {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+@section Styles {
+    <link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css" />
+}
 
 <div class="text-center">
     <h1 class="display-4">Dobrodošli! </h1>
 </div>
 
 <div class="card-deck">
+
     @foreach (var cat in Model)
     {
-    <div class="col-sm-4">
-        <div class="card border-warning" style="width: 18rem; margin-bottom:25px">
-            <div class="card-header"><h3><b>@Html.DisplayFor(modelItem => cat.Name)</b></h3></div>
-            <div class="container-pic">
-                <img class="card-img-bottom" width="250" height="200" style="margin:0px;" src="@Html.DisplayFor(modelItem => cat.ImageUrl)"  />
-                <div class="overlay">
-                    <div class="text">@Html.DisplayFor(modelItem => cat.ShortDescription)</div>
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="card border-warning" style="width: 18rem; margin-bottom:25px">
+                <div class="card-header"><h3><b>@Html.DisplayFor(modelItem => cat.Name)</b></h3></div>
+                <div class="container-pic">
+                    <img class="card-img-bottom" width="250" height="200" style="margin:0px;" src="@Html.DisplayFor(modelItem => cat.ImageUrl)" />
+                    <div class="overlay-pic">
+                        <div class="text-fade-away">@Html.DisplayFor(modelItem => cat.ShortDescription)</div>
+                    </div>
                 </div>
-            </div>
                 <div class="card-footer">
 
                     <div class="row">
-                        @* like *@
-                        <div class="col-sm">
-                            <a class="btn btn-outline-danger btn-lg">
-                                <i class="far fa-heart fa-lg"></i>
-                            </a>
-                        </div>
-                        @*comment*@
-                        <div class="col-sm">
-                            <a class="btn btn-outline-info btn-lg">
-                                <i class="far fa-comment-dots fa-lg"></i>
-                            </a>
-                        </div>
+                        @*like
+                            <div class="col-sm">
+                                <a class="btn btn-outline-danger btn-lg">
+                                    <i class="far fa-heart fa-lg"></i>
+                                </a>
+                            </div>
+                            comment
+                            <div class="col-sm">
+                                <a class="btn btn-outline-info btn-lg">
+                                    <i class="far fa-comment-dots fa-lg"></i>
+                                </a>
+                            </div>*@
                         @*shoppingcart*@
-                        <div class="col-sm-auto">
-                            <a class="btn btn-success btn-sm" style="width:62px;height:45px;padding:0" id="cartButton"
+                        <div class="col-sm-auto align-middle">
+                            <a class="btn btn-success btn-sm" style="width:250px;height:45px;padding:0" id="cartButton"
                                asp-controller="ShoppingCart"
                                asp-action="AddToShoppingCart"
                                asp-route-catId="@cat.CatId">
@@ -87,3 +89,4 @@
         </div>
     }
 </div>
+

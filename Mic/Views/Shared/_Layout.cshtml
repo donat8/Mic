@@ -1,56 +1,48 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject Microsoft.AspNetCore.Identity.SignInManager<IdentityUser> signInManager
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Mic</title>
+
+    <link href="@Url.Content("~/css/site.css")" rel="stylesheet" type="text/css" />
+    @RenderSection("Styles", false)
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    @*<link rel="stylesheet" href="~/css/site.css" />*@
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: #A199D4";>
-            @*<div class="container">*@
-                
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style=" background-color: #A199D4;">                       
+             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                     aria-expanded="false" aria-label="Toggle navigation">  
+                 <span class="navbar-toggler-icon"></span>
+             </button>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">  
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-around">
+                 <ul class="navbar-nav justify-content-around flex-grow-1">  
+                     <li class="nav-item">
+                         <a class="navbar-brand" asp-controller="Home" asp-action="Index">Mic</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link text-dark" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link text-dark" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
+                     </li>                    
+                     @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                     {
+                         <li class="nav-item">
+                             <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Role</a>
+                         </li>
+                     }
 
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-around">
-                    <ul class="navbar-nav justify-content-around flex-grow-1">  
-                        <li class="nav-item">
-                            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Mic</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
-                        </li>
-                        <li>
-                            <form class="form-inline">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Trazi</button>
-                            </form>
-                        </li>
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Role</a>
-                            </li>
-                        }
-
-                        <li>  @await Component.InvokeAsync("ShoppingCartSummary") </li>
-                        <li>@await Html.PartialAsync("LoginPartial")</li>
-                    </ul>
-                </div>
-            @*</div>*@
+                     <li>  @await Component.InvokeAsync("ShoppingCartSummary") </li>
+                     <li>@await Html.PartialAsync("LoginPartial")</li>
+                 </ul>
+             </div>
         </nav>
     </header>
     <div class="container">

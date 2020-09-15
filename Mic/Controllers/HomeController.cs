@@ -34,6 +34,19 @@ namespace Mic.Controllers
             return View(await micContext.ToListAsync());
         }
 
+        //[HttpPost]
+        //public async Task<IActionResult> Index(string SearchText)
+        //{
+        //    var model = from m in _context.Cat
+        //                select m;
+        //    if (!string.IsNullOrEmpty(SearchText))
+        //    {
+        //        model = model.Where(s => s.Name.Contains(SearchText));
+               
+        //    }
+        //    return View(await model.ToListAsync());
+        //}
+
         public IActionResult Privacy()
         {
             return View();
