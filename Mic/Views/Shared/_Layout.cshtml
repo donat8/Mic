@@ -12,42 +12,67 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     @*<link rel="stylesheet" href="~/css/site.css" />*@
     <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
+    <style>
+        .active-purple-2 input[type=text]:focus:not([readonly]) {
+            border-bottom: 1px solid #ce93d8;
+            box-shadow: 0 1px 0 0 #ce93d8;
+        }
+
+        .active-purple input[type=text] {
+            border-bottom: 1px solid #ce93d8;
+            box-shadow: 0 1px 0 0 #ce93d8;
+        }
+    </style>
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style=" background-color: #A199D4;">                       
-             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                     aria-expanded="false" aria-label="Toggle navigation">  
-                 <span class="navbar-toggler-icon"></span>
-             </button>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 fixed-top" style=" background-color: #A199D4;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-around">
-                 <ul class="navbar-nav justify-content-around flex-grow-1">  
-                     <li class="nav-item">
-                         <a class="navbar-brand" asp-controller="Home" asp-action="Index">Mic</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link text-dark" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
-                     </li>
-                     <li class="nav-item">
-                         <a class="nav-link text-dark" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
-                     </li>                    
-                     @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                     {
-                         <li class="nav-item">
-                             <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Role</a>
-                         </li>
-                     }
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse justify-content-around">
+                <ul class="navbar-nav justify-content-around flex-grow-1">
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-controller="Home" asp-action="Index"><b>Mic</b></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Cats" asp-action="Index">Dodaj novu mačku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Categories" asp-action="Index">Stvori svoju vrstu</a>
+                    </li>
+                    <li>
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                        {
+                            <form class="form-inline d-flex justify-content-center md-form form-sm active-purple-2 mt-2">
+                                <i class="fas fa-search active" aria-hidden="true"></i>
+                                @Html.TextBox("id",null,new { style = "color:#ce93d8;border: 1px solid #ce93d8;" }) @*<input class="form-control form-control-sm ml-3 w-75" id="search" type="submit" placeholder="Traži" aria-label="Search">*@
 
-                     <li>  @await Component.InvokeAsync("ShoppingCartSummary") </li>
-                     <li>@await Html.PartialAsync("LoginPartial")</li>
-                 </ul>
-             </div>
+                            </form>
+                        }
+                    </li>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Role</a>
+                        </li>
+                    }
+
+                    <li>  @await Component.InvokeAsync("ShoppingCartSummary") </li>
+                    <li>@await Html.PartialAsync("LoginPartial")</li>
+                </ul>
+            </div>
         </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <div style="margin-top:75px; ">
+                @RenderBody()
+                @RenderSection("scripts", required: false)
+            </div>
         </main>
     </div>
 
@@ -59,6 +84,24 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var search = $("#search").val().toLowerCase();
+
+                $.get('@Url.Action("Index", "Home")' + '?id=' + search.val(), unction(data) {
+                  
+                });
+            });
+
+          });
+
+
+
+    </script>
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+

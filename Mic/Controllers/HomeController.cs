@@ -23,29 +23,29 @@ namespace Mic.Controllers
             _context = context;
         }
 
-        //public HomeController(ILogger<HomeController> logger)
+        //public async Task<IActionResult> Index()
         //{
-        //    _logger = logger;
+        //    var micContext = _context.Cat.Include(c => c.Category);
+        //    return View(await micContext.ToListAsync());
         //}
-
-        public async Task<IActionResult> Index()
-        {
-            var micContext = _context.Cat.Include(c => c.Category);
-            return View(await micContext.ToListAsync());
-        }
 
         //[HttpPost]
-        //public async Task<IActionResult> Index(string SearchText)
-        //{
-        //    var model = from m in _context.Cat
-        //                select m;
-        //    if (!string.IsNullOrEmpty(SearchText))
-        //    {
-        //        model = model.Where(s => s.Name.Contains(SearchText));
-               
-        //    }
-        //    return View(await model.ToListAsync());
-        //}
+        public async Task<IActionResult> Index(string id)
+        {
+            var micContext = _context.Cat.Include(c => c.Category);
+
+            if (!string.IsNullOrWhiteSpace(id))
+            {
+                var model = from m in _context.Cat
+                            select m;
+                
+                 model = model.Where(s => s.Name.Contains(id));
+
+                
+                return View(await model.ToListAsync());
+            }
+            return View(await micContext.ToListAsync());
+        }
 
         public IActionResult Privacy()
         {
