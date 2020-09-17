@@ -3,10 +3,8 @@
 @if(Model.ShoppingCart.ShoppingCartItems.Count >0 )
 {<li>
     <a asp-controller="ShoppingCart" action="Index">
-        <span class="btn btn-outline-info">Količina u košarici: @Model.ShoppingCart.ShoppingCartItems.Count</span>
-        @*<span id="cart-status">
-           
-        </span>*@
+        <span class="btn btn-outline-warning">Količina u košarici: @Model.ShoppingCart.ShoppingCartItems.Count</span>
+    
        </a>
     </li>
 }

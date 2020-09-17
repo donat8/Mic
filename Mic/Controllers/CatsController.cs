@@ -24,6 +24,7 @@ namespace Mic.Controllers
         }
 
         // GET: Cats
+        [Authorize]
         public async Task<IActionResult> Index()
         {           
             var micContext = _context.Cat.Include(c => c.Category);
@@ -48,8 +49,6 @@ namespace Mic.Controllers
 
             return View(cat);
         }
-
-        [Authorize]
         
         // GET: Cats/Create
         [Authorize]
