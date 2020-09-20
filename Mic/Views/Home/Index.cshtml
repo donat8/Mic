@@ -11,7 +11,7 @@
     @foreach (var cat in Model)
     {
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="card border-warning" style="width: 18rem; margin-bottom:25px;">
+            <div class="card border-warning justify-content-center" style="width: 18rem; margin-bottom:25px;">
                 <div class="card-header"><h3><b>@Html.DisplayFor(modelItem => cat.Name)</b></h3></div>
                 <div class="container-pic">
                     <img class="card-img-bottom" width="250" height="200" style="margin:0px;" src="@Html.DisplayFor(modelItem => cat.ImageUrl)" />

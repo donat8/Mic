@@ -8,8 +8,9 @@ a.navbar-brand {
     font-style: italic;
 }
 
+
 .navbar {
-    background-color: #A199D4;
+   background: linear-gradient(120grad, rgb(100, 57, 134), rgb(152, 174, 213));
 }
 
 .search {
@@ -48,9 +49,6 @@ html {
   }
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
 .border-bottom {
     border-bottom: 1px solid #e5e5e5;
    
@@ -74,19 +72,22 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 30px;
-  background-color:plum;
+    /* Margin bottom by footer height */
+    margin-bottom: 30px;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     line-height: 30px; /* Vertically center the text there */
-    background-color: #A199D4;
+     background: linear-gradient(120grad, rgb(100, 57, 134), rgb(152, 174, 213));
 }
 
+.text-muted {
+    color:#a1a2c5;
+}
 
 .container-pic {
     position: relative;

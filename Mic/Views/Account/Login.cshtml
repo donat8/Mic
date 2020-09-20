@@ -2,13 +2,16 @@
 @{
     ViewData["Title"] = "Login";
 }
+<head>
+    <link href="@Url.Content("~/css/Log.css")" rel="stylesheet" type="text/css" />
 
+</head>
 <h1>Ulogirajte se:</h1>
 @model LoginViewModel
 
 <div class="row loginForm">
     <div class="col-md-8 col-md-offset-2">
-        <h2>Molimo vas da se ulogirate kako biste nastavili</h2>
+        <h2>Molimo vas da se ulogirate kako biste nastavili!</h2>
         <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
             <h4>Unesite detalje:</h4>
             <hr />
@@ -17,6 +20,8 @@
                 <label asp-for="UserName" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
                     <input asp-for="UserName" class="form-control" />
+                    <span class="icon"></span>
+
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
             </div>
@@ -25,6 +30,7 @@
                 <label asp-for="Password" class="col-md-2 control-label"></label>
                 <div class="col-md-10">
                     <input asp-for="Password" class="form-control" />
+                    <span class="icon"></span>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
             </div>

@@ -1,9 +1,14 @@
 ﻿@model Mic.Models.Order
 
+<head>
+    <link href="@Url.Content("~/css/Log.css")" rel="stylesheet" type="text/css" />
+
+</head>
+
 <div class="row orderForm ">
     <h3 class="text-center">Još samo jedan korak do usvajanja mice!</h3>
     <br />
-    </div>
+</div>
 <div>
     <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
         <div class="form-group">
@@ -36,7 +41,7 @@
                 <input asp-for="ZipCode" class="form-control" />
                 <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
-        </div>    
+        </div>
 
 
         <div class="form-group">
